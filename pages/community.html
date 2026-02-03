@@ -1,1 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - StudyZen</title>
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/community.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="default-theme">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fas fa-brain"></i>
+            <h2>Study<span class="zen">Zen</span></h2>
+        </div>
+        
+        <div class="user-profile">
+            <div class="profile-pic">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info">
+                <h3 id="userDisplayName">User</h3>
+                <p id="userStreak">🔥 0 day streak</p>
+            </div>
+        </div>
 
+        <ul class="nav-menu">
+            <li class="nav-item" data-page="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item" data-page="pomodoro">
+                <i class="fas fa-clock"></i>
+                <span>Pomodoro Timer</span>
+            </li>
+            <li class="nav-item" data-page="stopwatch">
+                <i class="fas fa-stopwatch"></i>
+                <span>Study Stopwatch</span>
+            </li>
+            <li class="nav-item" data-page="stats">
+                <i class="fas fa-chart-line"></i>
+                <span>Statistics</span>
+            </li>
+            <li class="nav-item" data-page="chatbot">
+                <i class="fas fa-robot"></i>
+                <span>AI Assistant</span>
+            </li>
+            <li class="nav-item active" data-page="community">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </li>
+            <li class="nav-item" data-page="profile">
+                <i class="fas fa-user-circle"></i>
+                <span>My Profile</span>
+            </li>
+            <li class="nav-item" data-page="themes">
+                <i class="fas fa-palette"></i>
+                <span>Themes</span>
+            </li>
+            <li class="nav-item" data-page="support">
+                <i class="fas fa-headset"></i>
+                <span>Support</span>
+            </li>
+        </ul>
+
+        <!-- Study Pet -->
+        <div class="study-pet">
+            <div class="pet-container">
+                <div class="pet" id="studyPet">
+                    <i class="fas fa-cat"></i>
+                </div>
+                <div class="pet-info">
+                    <p>Study Buddy</p>
+                    <div class="pet-happiness">
+                        <div class="happiness-bar">
+                            <div class="happiness-fill"></div>
+                        </div>
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search community posts, users, or topics...">
+            </div>
+            
+            <div class="top-bar-actions">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">0</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="focus-mode-btn" id="focusModeBtn">
+                    <i class="fas fa-eye"></i>
+                    <span>Focus Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Community Content -->
+        <div class="community-container">
+            <div class="community-header">
+                <h1><i class="fas fa-users"></i> Study Community</h1>
+                <p>Connect with fellow students, share knowledge, and study together!</p>
+            </div>
+
+            <div class="community-tabs">
+                <button class="tab-btn active" data-tab="forums">Forums</button>
+                <button class="tab-btn" data-tab="study-rooms">Study Rooms</button>
+                <button class="tab-btn" data-tab="users">Find Users</button>
+                <button class="tab-btn" data-tab="events">Events</button>
+                <button class="tab-btn" data-tab="resources">Resources</button>
+            </div>
+
+            <!-- Forums Tab -->
+            <div class="tab-content active" id="forums">
+                <div class="forums-header">
+                    <h2><i class="fas fa-comments"></i> Study Forums</h2>
+                    <button class="btn-primary" id="createPost">
+                        <i class="fas fa-plus"></i>
+                        Create New Post
+                    </button>
+                </div>
+
+                <div class="forum-categories">
+                    <div class="category active" data-category="all">All Topics</div>
+                    <div class="category" data-category="mathematics">Mathematics</div>
+                    <div class="category" data-category="programming">Programming</div>
+                    <div class="category" data-category="science">Science</div>
+                    <div class="category" data-category="language">Language</div>
+                    <div class="category" data-category="history">History</div>
+                    <div class="category" data-category="art">Art & Music</div>
+                    <div class="category" data-category="general">General</div>
+                </div>
+
+                <div class="posts-list" id="postsList">
+                    <!-- Forum posts will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Study Rooms Tab -->
+            <div class="tab-content" id="study-rooms">
+                <div class="study-rooms-header">
+                    <h2><i class="fas fa-video"></i> Virtual Study Rooms</h2>
+                    <button class="btn-primary" id="createRoom">
+                        <i class="fas fa-plus"></i>
+                        Create Study Room
+                    </button>
+                </div>
+
+                <div class="rooms-grid" id="roomsGrid">
+                    <!-- Study rooms will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div class="tab-content" id="users">
+                <div class="users-header">
+                    <h2><i class="fas fa-user-friends"></i> Find Study Buddies</h2>
+                    <div class="user-search">
+                        <input type="text" id="userSearch" placeholder="Search users by name or interests...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="users-filters">
+                    <div class="filter-group">
+                        <label>Study Level:</label>
+                        <select id="studyLevel">
+                            <option value="all">All Levels</option>
+                            <option value="high-school">High School</option>
+                            <option value="college">College</option>
+                            <option value="university">University</option>
+                            <option value="professional">Professional</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Subjects:</label>
+                        <select id="subjectFilter">
+                            <option value="all">All Subjects</option>
+                            <option value="mathematics">Mathematics</option>
+                            <option value="programming">Programming</option>
+                            <option value="science">Science</option>
+                            <option value="language">Language</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Online Status:</label>
+                        <select id="onlineFilter">
+                            <option value="all">All Users</option>
+                            <option value="online">Online Now</option>
+                            <option value="active">Recently Active</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="users-grid" id="usersGrid">
+                    <!-- Users will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Events Tab -->
+            <div class="tab-content" id="events">
+                <div class="events-header">
+                    <h2><i class="fas fa-calendar-alt"></i> Study Events</h2>
+                    <button class="btn-primary" id="createEvent">
+                        <i class="fas fa-plus"></i>
+                        Create Event
+                    </button>
+                </div>
+
+                <div class="events-calendar">
+                    <!-- Calendar will be loaded here -->
+                </div>
+
+                <div class="upcoming-events" id="upcomingEvents">
+                    <!-- Upcoming events will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Resources Tab -->
+            <div class="tab-content" id="resources">
+                <div class="resources-header">
+                    <h2><i class="fas fa-book-open"></i> Study Resources</h2>
+                    <button class="btn-primary" id="shareResource">
+                        <i class="fas fa-share"></i>
+                        Share Resource
+                    </button>
+                </div>
+
+                <div class="resources-categories">
+                    <div class="resource-category active" data-category="all">All Resources</div>
+                    <div class="resource-category" data-category="books">Books & PDFs</div>
+                    <div class="resource-category" data-category="videos">Video Tutorials</div>
+                    <div class="resource-category" data-category="websites">Websites</div>
+                    <div class="resource-category" data-category="tools">Study Tools</div>
+                    <div class="resource-category" data-category="notes">Study Notes</div>
+                </div>
+
+                <div class="resources-list" id="resourcesList">
+                    <!-- Resources will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Post Modal -->
+    <div class="modal" id="createPostModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Create New Post</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="postTitle">Post Title</label>
+                    <input type="text" id="postTitle" placeholder="Enter a descriptive title...">
+                </div>
+                <div class="form-group">
+                    <label for="postCategory">Category</label>
+                    <select id="postCategory">
+                        <option value="general">General</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="programming">Programming</option>
+                        <option value="science">Science</option>
+                        <option value="language">Language</option>
+                        <option value="history">History</option>
+                        <option value="art">Art & Music</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="postContent">Content</label>
+                    <textarea id="postContent" placeholder="Write your post here..." rows="8"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="postTags">Tags (comma separated)</label>
+                    <input type="text" id="postTags" placeholder="e.g., calculus, homework, help">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary close-modal">Cancel</button>
+                <button class="btn-primary" id="submitPost">Publish Post</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../scripts/database.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/community.js"></script>
+</body>
+</html>
