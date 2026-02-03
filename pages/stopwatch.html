@@ -1,1 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Stopwatch - StudyZen</title>
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/stopwatch.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="default-theme">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fas fa-brain"></i>
+            <h2>Study<span class="zen">Zen</span></h2>
+        </div>
+        
+        <div class="user-profile">
+            <div class="profile-pic">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info">
+                <h3 id="userDisplayName">User</h3>
+                <p id="userStreak">🔥 0 day streak</p>
+            </div>
+        </div>
 
+        <ul class="nav-menu">
+            <li class="nav-item" data-page="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item" data-page="pomodoro">
+                <i class="fas fa-clock"></i>
+                <span>Pomodoro Timer</span>
+            </li>
+            <li class="nav-item active" data-page="stopwatch">
+                <i class="fas fa-stopwatch"></i>
+                <span>Study Stopwatch</span>
+            </li>
+            <li class="nav-item" data-page="stats">
+                <i class="fas fa-chart-line"></i>
+                <span>Statistics</span>
+            </li>
+            <li class="nav-item" data-page="chatbot">
+                <i class="fas fa-robot"></i>
+                <span>AI Assistant</span>
+            </li>
+            <li class="nav-item" data-page="community">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </li>
+            <li class="nav-item" data-page="profile">
+                <i class="fas fa-user-circle"></i>
+                <span>My Profile</span>
+            </li>
+            <li class="nav-item" data-page="themes">
+                <i class="fas fa-palette"></i>
+                <span>Themes</span>
+            </li>
+            <li class="nav-item" data-page="support">
+                <i class="fas fa-headset"></i>
+                <span>Support</span>
+            </li>
+        </ul>
+
+        <!-- Study Pet -->
+        <div class="study-pet">
+            <div class="pet-container">
+                <div class="pet" id="studyPet">
+                    <i class="fas fa-cat"></i>
+                </div>
+                <div class="pet-info">
+                    <p>Study Buddy</p>
+                    <div class="pet-happiness">
+                        <div class="happiness-bar">
+                            <div class="happiness-fill"></div>
+                        </div>
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search users, forums, or features...">
+            </div>
+            
+            <div class="top-bar-actions">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">0</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="focus-mode-btn" id="focusModeBtn">
+                    <i class="fas fa-eye"></i>
+                    <span>Focus Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Stopwatch Content -->
+        <div class="stopwatch-container">
+            <div class="stopwatch-header">
+                <h1><i class="fas fa-stopwatch"></i> Study Stopwatch</h1>
+                <p>Track your exact study time. Start when you begin, stop when you're done!</p>
+            </div>
+            
+            <div class="stopwatch-main">
+                <div class="stopwatch-display">
+                    <div class="stopwatch-time">
+                        <span id="stopwatchHours">00</span>
+                        <span class="time-colon">:</span>
+                        <span id="stopwatchMinutes">00</span>
+                        <span class="time-colon">:</span>
+                        <span id="stopwatchSeconds">00</span>
+                    </div>
+                    <div class="stopwatch-milliseconds">
+                        <span id="stopwatchMilliseconds">00</span>
+                    </div>
+                </div>
+                
+                <div class="stopwatch-controls">
+                    <button class="stopwatch-btn start-btn" id="startStopwatch">
+                        <i class="fas fa-play"></i>
+                        <span>Start Studying</span>
+                    </button>
+                    <button class="stopwatch-btn pause-btn" id="pauseStopwatch" disabled>
+                        <i class="fas fa-pause"></i>
+                        <span>Pause</span>
+                    </button>
+                    <button class="stopwatch-btn lap-btn" id="lapStopwatch">
+                        <i class="fas fa-flag"></i>
+                        <span>Lap</span>
+                    </button>
+                    <button class="stopwatch-btn reset-btn" id="resetStopwatch">
+                        <i class="fas fa-stop"></i>
+                        <span>Stop & Save</span>
+                    </button>
+                </div>
+                
+                <div class="lap-times">
+                    <h3><i class="fas fa-flag-checkered"></i> Session Laps</h3>
+                    <div class="lap-list" id="lapList">
+                        <!-- Lap times will appear here -->
+                    </div>
+                </div>
+                
+                <div class="subject-selection">
+                    <h3><i class="fas fa-book"></i> What are you studying?</h3>
+                    <div class="subject-tags">
+                        <span class="subject-tag" data-subject="Mathematics">Mathematics</span>
+                        <span class="subject-tag" data-subject="Programming">Programming</span>
+                        <span class="subject-tag" data-subject="Language">Language</span>
+                        <span class="subject-tag" data-subject="Science">Science</span>
+                        <span class="subject-tag" data-subject="History">History</span>
+                        <span class="subject-tag" data-subject="Art">Art</span>
+                        <span class="subject-tag" data-subject="Music">Music</span>
+                        <span class="subject-tag" data-subject="Other">Other</span>
+                    </div>
+                    <input type="text" class="custom-subject" placeholder="Or enter custom subject...">
+                </div>
+                
+                <div class="recent-sessions">
+                    <!-- Recent sessions will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../scripts/database.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/stopwatch.js"></script>
+</body>
+</html>
