@@ -1,1 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer - StudyZen</title>
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/pomodoro.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="default-theme">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fas fa-brain"></i>
+            <h2>Study<span class="zen">Zen</span></h2>
+        </div>
+        
+        <div class="user-profile">
+            <div class="profile-pic">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info">
+                <h3 id="userDisplayName">User</h3>
+                <p id="userStreak">🔥 0 day streak</p>
+            </div>
+        </div>
 
+        <ul class="nav-menu">
+            <li class="nav-item" data-page="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item active" data-page="pomodoro">
+                <i class="fas fa-clock"></i>
+                <span>Pomodoro Timer</span>
+            </li>
+            <li class="nav-item" data-page="stopwatch">
+                <i class="fas fa-stopwatch"></i>
+                <span>Study Stopwatch</span>
+            </li>
+            <li class="nav-item" data-page="stats">
+                <i class="fas fa-chart-line"></i>
+                <span>Statistics</span>
+            </li>
+            <li class="nav-item" data-page="chatbot">
+                <i class="fas fa-robot"></i>
+                <span>AI Assistant</span>
+            </li>
+            <li class="nav-item" data-page="community">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </li>
+            <li class="nav-item" data-page="profile">
+                <i class="fas fa-user-circle"></i>
+                <span>My Profile</span>
+            </li>
+            <li class="nav-item" data-page="themes">
+                <i class="fas fa-palette"></i>
+                <span>Themes</span>
+            </li>
+            <li class="nav-item" data-page="support">
+                <i class="fas fa-headset"></i>
+                <span>Support</span>
+            </li>
+        </ul>
+
+        <!-- Study Pet -->
+        <div class="study-pet">
+            <div class="pet-container">
+                <div class="pet" id="studyPet">
+                    <i class="fas fa-cat"></i>
+                </div>
+                <div class="pet-info">
+                    <p>Study Buddy</p>
+                    <div class="pet-happiness">
+                        <div class="happiness-bar">
+                            <div class="happiness-fill"></div>
+                        </div>
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search users, forums, or features...">
+            </div>
+            
+            <div class="top-bar-actions">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">0</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="focus-mode-btn" id="focusModeBtn">
+                    <i class="fas fa-eye"></i>
+                    <span>Focus Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Pomodoro Content -->
+        <div class="pomodoro-container">
+            <div class="pomodoro-header">
+                <h1><i class="fas fa-clock"></i> Pomodoro Timer</h1>
+                <p>Focus for 25 minutes, break for 5 minutes. Customize as needed!</p>
+            </div>
+            
+            <div class="pomodoro-main">
+                <div class="timer-display">
+                    <div class="timer-circle">
+                        <svg class="timer-svg" viewBox="0 0 100 100">
+                            <circle class="timer-background" cx="50" cy="50" r="45"></circle>
+                            <circle class="timer-progress" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <div class="timer-text">
+                            <div id="timerMinutes">25</div>
+                            <div class="timer-colon">:</div>
+                            <div id="timerSeconds">00</div>
+                        </div>
+                        <div class="timer-label" id="timerLabel">Focus Time</div>
+                    </div>
+                </div>
+                
+                <div class="timer-controls">
+                    <button class="timer-btn start-btn" id="startTimer">
+                        <i class="fas fa-play"></i>
+                        <span>Start</span>
+                    </button>
+                    <button class="timer-btn pause-btn" id="pauseTimer" disabled>
+                        <i class="fas fa-pause"></i>
+                        <span>Pause</span>
+                    </button>
+                    <button class="timer-btn reset-btn" id="resetTimer">
+                        <i class="fas fa-redo"></i>
+                        <span>Reset</span>
+                    </button>
+                    <button class="timer-btn skip-btn" id="skipTimer">
+                        <i class="fas fa-forward"></i>
+                        <span>Skip</span>
+                    </button>
+                </div>
+                
+                <div class="pomodoro-settings">
+                    <h3><i class="fas fa-cog"></i> Timer Settings</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label for="focusTime">Focus Time (minutes)</label>
+                            <input type="number" id="focusTime" min="5" max="60" value="25">
+                        </div>
+                        <div class="setting-item">
+                            <label for="breakTime">Short Break (minutes)</label>
+                            <input type="number" id="breakTime" min="1" max="15" value="5">
+                        </div>
+                        <div class="setting-item">
+                            <label for="longBreakTime">Long Break (minutes)</label>
+                            <input type="number" id="longBreakTime" min="10" max="30" value="15">
+                        </div>
+                        <div class="setting-item">
+                            <label for="sessionsBeforeLongBreak">Sessions before long break</label>
+                            <input type="number" id="sessionsBeforeLongBreak" min="2" max="8" value="4">
+                        </div>
+                    </div>
+                    
+                    <div class="subject-selection">
+                        <h4>What are you studying?</h4>
+                        <div class="subject-tags">
+                            <span class="subject-tag" data-subject="Mathematics">Mathematics</span>
+                            <span class="subject-tag" data-subject="Programming">Programming</span>
+                            <span class="subject-tag" data-subject="Language">Language</span>
+                            <span class="subject-tag" data-subject="Science">Science</span>
+                            <span class="subject-tag" data-subject="History">History</span>
+                            <span class="subject-tag" data-subject="Art">Art</span>
+                            <span class="subject-tag" data-subject="Music">Music</span>
+                            <span class="subject-tag" data-subject="Other">Other</span>
+                        </div>
+                        <input type="text" id="customSubject" placeholder="Or enter custom subject...">
+                    </div>
+                </div>
+                
+                <div class="pomodoro-stats">
+                    <div class="stat-box">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h3 id="completedSessions">0</h3>
+                            <p>Today's Sessions</p>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-fire"></i>
+                        <div>
+                            <h3 id="focusStreak">0</h3>
+                            <p>Focus Streak</p>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-brain"></i>
+                        <div>
+                            <h3 id="totalFocusTime">0h 0m</h3>
+                            <p>Total Focus Time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../scripts/database.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/pomodoro.js"></script>
+</body>
+</html>
