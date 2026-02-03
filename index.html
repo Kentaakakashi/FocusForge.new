@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyZen - Your Ultimate Study Companion</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="landing-page">
+    <!-- Animated Background -->
+    <div class="floating-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+        <div class="shape shape4"></div>
+    </div>
 
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Animated Header -->
+        <header class="main-header">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <h1 class="logo-text">Study<span class="zen">Zen</span></h1>
+                <div class="sparkle"></div>
+            </div>
+            <p class="tagline">Transform your study sessions into magical experiences ✨</p>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="hero">
+            <div class="hero-content">
+                <h2 class="hero-title animate-typing">Welcome to Your Study Sanctuary</h2>
+                <p class="hero-description">Boost productivity with Pomodoro timers, track progress, join study communities, and customize your perfect study environment!</p>
+                
+                <!-- Feature Highlights -->
+                <div class="feature-highlights">
+                    <div class="feature-card" data-animation="bounce">
+                        <i class="fas fa-clock"></i>
+                        <h3>Smart Timer</h3>
+                        <p>Customizable Pomodoro with breaks</p>
+                    </div>
+                    <div class="feature-card" data-animation="bounce">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Assistant</h3>
+                        <p>24/7 study help & planning</p>
+                    </div>
+                    <div class="feature-card" data-animation="bounce">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Progress Tracking</h3>
+                        <p>Detailed stats & analytics</p>
+                    </div>
+                    <div class="feature-card" data-animation="bounce">
+                        <i class="fas fa-users"></i>
+                        <h3>Study Community</h3>
+                        <p>Connect & learn together</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Auth Section -->
+            <div class="auth-section" id="authSection">
+                <div class="auth-tabs">
+                    <button class="tab-btn active" data-tab="login">Login</button>
+                    <button class="tab-btn" data-tab="signup">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <div class="auth-form active" id="loginForm">
+                    <div class="form-group">
+                        <input type="text" id="loginUsername" placeholder="Username" class="form-input" required>
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="loginPassword" placeholder="Password" class="form-input" required>
+                        <i class="fas fa-lock input-icon"></i>
+                    </div>
+                    <button class="btn-primary" id="loginBtn">
+                        <span>Login</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                </div>
+
+                <!-- Signup Form -->
+                <div class="auth-form" id="signupForm">
+                    <div class="form-group">
+                        <input type="text" id="signupUsername" placeholder="Choose unique username" class="form-input" required>
+                        <i class="fas fa-at input-icon"></i>
+                        <div class="hint">This will be used to login</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="displayName" placeholder="Display name (can be anything)" class="form-input" required>
+                        <i class="fas fa-user-tag input-icon"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signupPassword" placeholder="Password" class="form-input" required>
+                        <i class="fas fa-lock input-icon"></i>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="confirmPassword" placeholder="Confirm password" class="form-input" required>
+                        <i class="fas fa-lock input-icon"></i>
+                    </div>
+                    <button class="btn-primary" id="signupBtn">
+                        <span>Create Account</span>
+                        <i class="fas fa-magic"></i>
+                    </button>
+                </div>
+
+                <!-- Demo Option -->
+                <div class="demo-option">
+                    <p>Just want to explore?</p>
+                    <button class="btn-secondary" id="demoBtn">
+                        <i class="fas fa-eye"></i>
+                        Try Demo Mode
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Theme Preview -->
+        <section class="theme-preview">
+            <h3>Choose Your Study Vibe</h3>
+            <div class="theme-cards">
+                <div class="theme-card" data-theme="lofi">
+                    <div class="theme-preview-img lofi-theme"></div>
+                    <span>Lofi Beats</span>
+                </div>
+                <div class="theme-card" data-theme="japanese">
+                    <div class="theme-preview-img japanese-theme"></div>
+                    <span>Japanese Garden</span>
+                </div>
+                <div class="theme-card" data-theme="cozy">
+                    <div class="theme-preview-img cozy-theme"></div>
+                    <span>Cozy Café</span>
+                </div>
+                <div class="theme-card" data-theme="cyberpunk">
+                    <div class="theme-preview-img cyberpunk-theme"></div>
+                    <span>Cyberpunk</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Confetti Animation Container -->
+    <div class="confetti-container"></div>
+
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
