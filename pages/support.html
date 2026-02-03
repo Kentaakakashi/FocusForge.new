@@ -1,1 +1,440 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - StudyZen</title>
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/support.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="default-theme">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fas fa-brain"></i>
+            <h2>Study<span class="zen">Zen</span></h2>
+        </div>
+        
+        <div class="user-profile">
+            <div class="profile-pic">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info">
+                <h3 id="userDisplayName">User</h3>
+                <p id="userStreak">🔥 0 day streak</p>
+            </div>
+        </div>
+
+        <ul class="nav-menu">
+            <li class="nav-item" data-page="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item" data-page="pomodoro">
+                <i class="fas fa-clock"></i>
+                <span>Pomodoro Timer</span>
+            </li>
+            <li class="nav-item" data-page="stopwatch">
+                <i class="fas fa-stopwatch"></i>
+                <span>Study Stopwatch</span>
+            </li>
+            <li class="nav-item" data-page="stats">
+                <i class="fas fa-chart-line"></i>
+                <span>Statistics</span>
+            </li>
+            <li class="nav-item" data-page="chatbot">
+                <i class="fas fa-robot"></i>
+                <span>AI Assistant</span>
+            </li>
+            <li class="nav-item" data-page="community">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </li>
+            <li class="nav-item" data-page="profile">
+                <i class="fas fa-user-circle"></i>
+                <span>My Profile</span>
+            </li>
+            <li class="nav-item" data-page="themes">
+                <i class="fas fa-palette"></i>
+                <span>Themes</span>
+            </li>
+            <li class="nav-item active" data-page="support">
+                <i class="fas fa-headset"></i>
+                <span>Support</span>
+            </li>
+        </ul>
+
+        <!-- Study Pet -->
+        <div class="study-pet">
+            <div class="pet-container">
+                <div class="pet" id="studyPet">
+                    <i class="fas fa-cat"></i>
+                </div>
+                <div class="pet-info">
+                    <p>Study Buddy</p>
+                    <div class="pet-happiness">
+                        <div class="happiness-bar">
+                            <div class="happiness-fill"></div>
+                        </div>
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search support articles...">
+            </div>
+            
+            <div class="top-bar-actions">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">0</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="focus-mode-btn" id="focusModeBtn">
+                    <i class="fas fa-eye"></i>
+                    <span>Focus Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Support Content -->
+        <div class="support-container">
+            <div class="support-header">
+                <h1><i class="fas fa-headset"></i> Support Center</h1>
+                <p>Need help? We're here for you! Report bugs, ask questions, or get assistance.</p>
+            </div>
+
+            <div class="support-tabs">
+                <button class="tab-btn active" data-tab="ticket">Submit Ticket</button>
+                <button class="tab-btn" data-tab="faq">FAQ</button>
+                <button class="tab-btn" data-tab="guides">Guides</button>
+                <button class="tab-btn" data-tab="status">System Status</button>
+                <button class="tab-btn" data-tab="my-tickets">My Tickets</button>
+            </div>
+
+            <!-- Submit Ticket Tab -->
+            <div class="tab-content active" id="ticket">
+                <div class="ticket-form">
+                    <h2><i class="fas fa-ticket-alt"></i> Submit a Support Ticket</h2>
+                    <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                    
+                    <div class="form-group">
+                        <label for="ticketType">Type of Issue</label>
+                        <select id="ticketType">
+                            <option value="">Select issue type...</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="account">Account Issue</option>
+                            <option value="billing">Billing/Payment</option>
+                            <option value="technical">Technical Problem</option>
+                            <option value="general">General Question</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ticketSubject">Subject</label>
+                        <input type="text" id="ticketSubject" placeholder="Brief description of your issue...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ticketDescription">Description</label>
+                        <textarea id="ticketDescription" placeholder="Please provide detailed information about your issue..." rows="10"></textarea>
+                        <div class="description-tips">
+                            <p><strong>Tips for better help:</strong></p>
+                            <ul>
+                                <li>Describe what you were doing when the issue occurred</li>
+                                <li>Include any error messages you saw</li>
+                                <li>Mention your browser and device type</li>
+                                <li>Add steps to reproduce the issue if possible</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ticketPriority">Priority</label>
+                        <select id="ticketPriority">
+                            <option value="low">Low - General question or suggestion</option>
+                            <option value="medium" selected>Medium - Feature not working properly</option>
+                            <option value="high">High - Critical feature broken</option>
+                            <option value="urgent">Urgent - Cannot use the application</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ticketAttachments">Attachments (optional)</label>
+                        <div class="file-upload">
+                            <input type="file" id="ticketAttachments" multiple>
+                            <label for="ticketAttachments" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Click to upload files or drag and drop</span>
+                                <small>Maximum file size: 10MB. Supported: images, documents</small>
+                            </label>
+                        </div>
+                        <div class="file-list" id="fileList">
+                            <!-- Uploaded files will appear here -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ticketEmail">Contact Email</label>
+                        <input type="email" id="ticketEmail" placeholder="Your email for updates" value="KenKavStudyWeb@gmail.com">
+                        <small>Tickets will be sent to this email: KenKavStudyWeb@gmail.com</small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn-secondary" id="saveDraft">
+                            <i class="fas fa-save"></i>
+                            Save Draft
+                        </button>
+                        <button class="btn-primary" id="submitTicket">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Ticket
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Tab -->
+            <div class="tab-content" id="faq">
+                <div class="faq-container">
+                    <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+                    
+                    <div class="faq-categories">
+                        <button class="faq-category active" data-category="general">General</button>
+                        <button class="faq-category" data-category="account">Account</button>
+                        <button class="faq-category" data-category="features">Features</button>
+                        <button class="faq-category" data-category="technical">Technical</button>
+                        <button class="faq-category" data-category="community">Community</button>
+                    </div>
+
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How do I create an account?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Click the "Sign Up" button on the homepage. You'll need to choose a unique username, a display name, and a password. No email is required!</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How does the Pomodoro timer work?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>The Pomodoro technique involves studying for 25 minutes, then taking a 5-minute break. After 4 sessions, take a longer 15-30 minute break. You can customize these times in the settings.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>Can I use StudyZen on multiple devices?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes! Your data is stored locally in your browser. To sync across devices, make sure you're using the same browser and have enabled sync in your browser settings.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>How do I reset my password?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Since StudyZen doesn't use email verification, you'll need to remember your password. We recommend using a password manager. If you forget your password, you'll need to create a new account.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>What happens to my data if I clear browser cache?</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>StudyZen stores data in your browser's localStorage. If you clear your browser cache or use incognito mode, your data will be lost. We recommend regularly exporting your data from the Statistics page.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guides Tab -->
+            <div class="tab-content" id="guides">
+                <div class="guides-container">
+                    <h2><i class="fas fa-book-open"></i> User Guides & Tutorials</h2>
+                    
+                    <div class="guides-grid">
+                        <div class="guide-card">
+                            <div class="guide-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <h3>Getting Started</h3>
+                            <p>Learn how to set up your account, customize your profile, and navigate the dashboard.</p>
+                            <a href="#" class="guide-link">Read Guide →</a>
+                        </div>
+
+                        <div class="guide-card">
+                            <div class="guide-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>Mastering Pomodoro</h3>
+                            <p>Advanced tips for using the Pomodoro timer effectively and customizing your study sessions.</p>
+                            <a href="#" class="guide-link">Read Guide →</a>
+                        </div>
+
+                        <div class="guide-card">
+                            <div class="guide-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Understanding Statistics</h3>
+                            <p>How to interpret your study data and use it to improve your productivity.</p>
+                            <a href="#" class="guide-link">Read Guide →</a>
+                        </div>
+
+                        <div class="guide-card">
+                            <div class="guide-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>AI Assistant Guide</h3>
+                            <p>Learn how to use the AI assistant for study help, planning, and problem-solving.</p>
+                            <a href="#" class="guide-link">Read Guide →</a>
+                        </div>
+
+                        <div class="guide-card">
+                            <div class="guide-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Community Features</h3>
+                            <p>How to connect with other students, join study rooms, and participate in forums.</p>
+                            <a href="#" class="guide-link">Read Guide →</a>
+                        </div>
+
+                        <div class="guide-card">
+                            <div class="guide-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h3>Themes & Customization</h3>
+                            <p>Guide to customizing your study environment with themes, colors, and animations.</p>
+                            <a href="#" class="guide-link">Read Guide →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status Tab -->
+            <div class="tab-content" id="status">
+                <div class="status-container">
+                    <h2><i class="fas fa-server"></i> System Status</h2>
+                    
+                    <div class="status-overview">
+                        <div class="status-item operational">
+                            <div class="status-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="status-info">
+                                <h3>All Systems Operational</h3>
+                                <p>Last updated: Just now</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="status-components">
+                        <h3>System Components</h3>
+                        <div class="components-grid">
+                            <div class="component operational">
+                                <span class="component-name">Website</span>
+                                <span class="component-status">Operational</span>
+                            </div>
+                            <div class="component operational">
+                                <span class="component-name">Authentication</span>
+                                <span class="component-status">Operational</span>
+                            </div>
+                            <div class="component operational">
+                                <span class="component-name">Pomodoro Timer</span>
+                                <span class="component-status">Operational</span>
+                            </div>
+                            <div class="component operational">
+                                <span class="component-name">Stopwatch</span>
+                                <span class="component-status">Operational</span>
+                            </div>
+                            <div class="component operational">
+                                <span class="component-name">Statistics</span>
+                                <span class="component-status">Operational</span>
+                            </div>
+                            <div class="component operational">
+                                <span class="component-name">AI Assistant</span>
+                                <span class="component-status">Operational</span>
+                            </div>
+                            <div class="component operational">
+                                <span class="component-name">Community</span>
+                                <span class="component-status">Operational</span>
+                            </div>
+                            <div class="component operational">
+                                <span class="component-name">Database</span>
+                                <span class="component-status">Operational</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="status-history">
+                        <h3>Recent Incidents</h3>
+                        <div class="incidents-list">
+                            <div class="incident">
+                                <div class="incident-date">No incidents in the past 90 days</div>
+                                <div class="incident-status resolved">Resolved</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Tickets Tab -->
+            <div class="tab-content" id="my-tickets">
+                <div class="tickets-container">
+                    <h2><i class="fas fa-ticket-alt"></i> My Support Tickets</h2>
+                    
+                    <div class="tickets-filters">
+                        <button class="filter-btn active" data-filter="all">All Tickets</button>
+                        <button class="filter-btn" data-filter="open">Open</button>
+                        <button class="filter-btn" data-filter="pending">Pending</button>
+                        <button class="filter-btn" data-filter="resolved">Resolved</button>
+                        <button class="filter-btn" data-filter="closed">Closed</button>
+                    </div>
+
+                    <div class="tickets-list" id="ticketsList">
+                        <!-- Tickets will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../scripts/database.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/support.js"></script>
+</body>
+</html>
