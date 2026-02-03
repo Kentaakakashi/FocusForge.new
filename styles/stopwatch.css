@@ -1,1 +1,78 @@
+/* Stopwatch Styles */
+.stopwatch-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    animation: fadeIn 0.5s ease;
+}
 
+.stopwatch-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.stopwatch-header h1 {
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.stopwatch-header p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.stopwatch-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+.stopwatch-display {
+    background: var(--card-bg);
+    padding: 3rem;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.stopwatch-display.pulsing {
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: var(--shadow);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
+    }
+}
+
+.stopwatch-time {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 1rem;
+}
+
+.time-colon {
+    animation: blink 1s infinite;
+}
+
+.stopwatch-milliseconds {
+    font-size: 2rem;
+    color: #666;
+    font-family: 'Courier New', monospace;
+}
+
+.stopwatch-controls {
+    display
