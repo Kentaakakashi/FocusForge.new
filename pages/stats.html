@@ -1,1 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics - StudyZen</title>
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/stats.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="default-theme">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fas fa-brain"></i>
+            <h2>Study<span class="zen">Zen</span></h2>
+        </div>
+        
+        <div class="user-profile">
+            <div class="profile-pic">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info">
+                <h3 id="userDisplayName">User</h3>
+                <p id="userStreak">🔥 0 day streak</p>
+            </div>
+        </div>
 
+        <ul class="nav-menu">
+            <li class="nav-item" data-page="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item" data-page="pomodoro">
+                <i class="fas fa-clock"></i>
+                <span>Pomodoro Timer</span>
+            </li>
+            <li class="nav-item" data-page="stopwatch">
+                <i class="fas fa-stopwatch"></i>
+                <span>Study Stopwatch</span>
+            </li>
+            <li class="nav-item active" data-page="stats">
+                <i class="fas fa-chart-line"></i>
+                <span>Statistics</span>
+            </li>
+            <li class="nav-item" data-page="chatbot">
+                <i class="fas fa-robot"></i>
+                <span>AI Assistant</span>
+            </li>
+            <li class="nav-item" data-page="community">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </li>
+            <li class="nav-item" data-page="profile">
+                <i class="fas fa-user-circle"></i>
+                <span>My Profile</span>
+            </li>
+            <li class="nav-item" data-page="themes">
+                <i class="fas fa-palette"></i>
+                <span>Themes</span>
+            </li>
+            <li class="nav-item" data-page="support">
+                <i class="fas fa-headset"></i>
+                <span>Support</span>
+            </li>
+        </ul>
+
+        <!-- Study Pet -->
+        <div class="study-pet">
+            <div class="pet-container">
+                <div class="pet" id="studyPet">
+                    <i class="fas fa-cat"></i>
+                </div>
+                <div class="pet-info">
+                    <p>Study Buddy</p>
+                    <div class="pet-happiness">
+                        <div class="happiness-bar">
+                            <div class="happiness-fill"></div>
+                        </div>
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search users, forums, or features...">
+            </div>
+            
+            <div class="top-bar-actions">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">0</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="focus-mode-btn" id="focusModeBtn">
+                    <i class="fas fa-eye"></i>
+                    <span>Focus Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Content -->
+        <div class="stats-container">
+            <div class="stats-header">
+                <h1><i class="fas fa-chart-line"></i> Study Statistics</h1>
+                <p>Track your progress, analyze patterns, and improve your study habits</p>
+            </div>
+
+            <!-- Time Range Selector -->
+            <div class="time-range">
+                <select id="timeRange">
+                    <option value="week">Last 7 Days</option>
+                    <option value="month">Last 30 Days</option>
+                    <option value="all" selected>All Time</option>
+                </select>
+            </div>
+
+            <!-- Stats Controls -->
+            <div class="stats-controls">
+                <button class="control-btn refresh-btn" id="refreshStats">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Refresh</span>
+                </button>
+                <button class="control-btn export-btn" id="exportStats">
+                    <i class="fas fa-download"></i>
+                    <span>Export Data</span>
+                </button>
+                <button class="control-btn share-btn" id="shareStats">
+                    <i class="fas fa-share-alt"></i>
+                    <span>Share Stats</span>
+                </button>
+            </div>
+
+            <!-- Quick Stats Overview -->
+            <div class="stats-overview">
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <h2 id="totalStudyHours">0</h2>
+                    <p>Total Study Hours</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-fire"></i>
+                    <h2 id="currentStreakStats">0</h2>
+                    <p>Current Streak</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-trophy"></i>
+                    <h2 id="longestStreak">0</h2>
+                    <p>Longest Streak</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h2 id="pomodoroSessions">0</h2>
+                    <p>Pomodoro Sessions</p>
+                </div>
+                <div class="stat-card large">
+                    <div class="productivity-score">
+                        <svg viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="#f0f0f0" stroke-width="10"/>
+                            <circle class="productivity-score-circle" cx="50" cy="50" r="45" fill="none" stroke="#667eea" stroke-width="10" stroke-dasharray="0 283"/>
+                        </svg>
+                        <div class="score-value" id="productivityScore">0</div>
+                    </div>
+                    <p>Productivity Score</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <div class="chart-container">
+                    <h3><i class="fas fa-calendar-day"></i> Daily Study Hours</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="dailyChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3><i class="fas fa-book"></i> Subject Distribution</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="subjectChart" width="300" height="300"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3><i class="fas fa-chart-bar"></i> Productivity by Hour</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="productivityChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subject Breakdown -->
+            <div class="subject-breakdown">
+                <h3><i class="fas fa-pie-chart"></i> Subject Breakdown</h3>
+                <div id="subjectBreakdown">
+                    <!-- Subject items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Achievements Section -->
+            <div class="achievements-section">
+                <h3><i class="fas fa-trophy"></i> Achievements</h3>
+                <div class="achievements-grid" id="achievementsList">
+                    <!-- Achievements will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Study Patterns -->
+            <div class="study-patterns">
+                <h3><i class="fas fa-chart-network"></i> Study Patterns</h3>
+                <div class="patterns-grid">
+                    <div class="pattern-card">
+                        <i class="fas fa-clock"></i>
+                        <h4 id="avgSessionLength">0 min</h4>
+                        <p>Average Session Length</p>
+                    </div>
+                    <div class="pattern-card">
+                        <i class="fas fa-sun"></i>
+                        <h4 id="mostProductiveTime">N/A</h4>
+                        <p>Most Productive Time</p>
+                    </div>
+                    <div class="pattern-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <h4 id="consistencyScore">0%</h4>
+                        <p>Consistency Score</p>
+                    </div>
+                    <div class="pattern-card">
+                        <i class="fas fa-calendar"></i>
+                        <h4 id="bestDay">N/A</h4>
+                        <p>Best Day</p>
+                    </div>
+                    <div class="pattern-card">
+                        <i class="fas fa-calendar-times"></i>
+                        <h4 id="worstDay">N/A</h4>
+                        <p>Least Productive Day</p>
+                    </div>
+                    <div class="pattern-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4 id="avgDailyStudy">0h</h4>
+                        <p>Average Daily Study</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../scripts/database.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/stats.js"></script>
+</body>
+</html>
