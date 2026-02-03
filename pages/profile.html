@@ -1,1 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - StudyZen</title>
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/profile.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="default-theme">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fas fa-brain"></i>
+            <h2>Study<span class="zen">Zen</span></h2>
+        </div>
+        
+        <div class="user-profile">
+            <div class="profile-pic">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info">
+                <h3 id="userDisplayName">User</h3>
+                <p id="userStreak">🔥 0 day streak</p>
+            </div>
+        </div>
 
+        <ul class="nav-menu">
+            <li class="nav-item" data-page="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item" data-page="pomodoro">
+                <i class="fas fa-clock"></i>
+                <span>Pomodoro Timer</span>
+            </li>
+            <li class="nav-item" data-page="stopwatch">
+                <i class="fas fa-stopwatch"></i>
+                <span>Study Stopwatch</span>
+            </li>
+            <li class="nav-item" data-page="stats">
+                <i class="fas fa-chart-line"></i>
+                <span>Statistics</span>
+            </li>
+            <li class="nav-item" data-page="chatbot">
+                <i class="fas fa-robot"></i>
+                <span>AI Assistant</span>
+            </li>
+            <li class="nav-item" data-page="community">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </li>
+            <li class="nav-item active" data-page="profile">
+                <i class="fas fa-user-circle"></i>
+                <span>My Profile</span>
+            </li>
+            <li class="nav-item" data-page="themes">
+                <i class="fas fa-palette"></i>
+                <span>Themes</span>
+            </li>
+            <li class="nav-item" data-page="support">
+                <i class="fas fa-headset"></i>
+                <span>Support</span>
+            </li>
+        </ul>
+
+        <!-- Study Pet -->
+        <div class="study-pet">
+            <div class="pet-container">
+                <div class="pet" id="studyPet">
+                    <i class="fas fa-cat"></i>
+                </div>
+                <div class="pet-info">
+                    <p>Study Buddy</p>
+                    <div class="pet-happiness">
+                        <div class="happiness-bar">
+                            <div class="happiness-fill"></div>
+                        </div>
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search users, forums, or features...">
+            </div>
+            
+            <div class="top-bar-actions">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">0</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="focus-mode-btn" id="focusModeBtn">
+                    <i class="fas fa-eye"></i>
+                    <span>Focus Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Profile Content -->
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <div class="avatar-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="avatar-actions">
+                        <button class="avatar-btn" id="changeAvatar">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                        <button class="avatar-btn" id="editProfile">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h1 id="profileName">Username</h1>
+                    <p class="profile-bio" id="profileBio">No bio yet. Tell us about yourself!</p>
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <span class="stat-value" id="totalStudyStat">0h</span>
+                            <span class="stat-label">Total Study</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="stat-value" id="streakStat">0</span>
+                            <span class="stat-label">Day Streak</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="stat-value" id="followersStat">0</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="stat-value" id="followingStat">0</span>
+                            <span class="stat-label">Following</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn-primary" id="shareProfile">
+                        <i class="fas fa-share-alt"></i>
+                        Share Profile
+                    </button>
+                    <button class="btn-secondary" id="editSettings">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </button>
+                </div>
+            </div>
+
+            <div class="profile-tabs">
+                <button class="tab-btn active" data-tab="overview">Overview</button>
+                <button class="tab-btn" data-tab="activity">Activity</button>
+                <button class="tab-btn" data-tab="achievements">Achievements</button>
+                <button class="tab-btn" data-tab="goals">Goals</button>
+                <button class="tab-btn" data-tab="friends">Friends</button>
+                <button class="tab-btn" data-tab="settings">Settings</button>
+            </div>
+
+            <div class="tab-content">
+                <!-- Overview Tab -->
+                <div class="tab-pane active" id="overview">
+                    <div class="overview-grid">
+                        <div class="overview-card">
+                            <h3><i class="fas fa-chart-line"></i> Weekly Progress</h3>
+                            <div class="progress-chart">
+                                <canvas id="weeklyProgressChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <h3><i class="fas fa-book"></i> Top Subjects</h3>
+                            <div class="subject-list" id="topSubjects">
+                                <!-- Subjects will be loaded here -->
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <h3><i class="fas fa-calendar"></i> Study Calendar</h3>
+                            <div class="study-calendar" id="studyCalendar">
+                                <!-- Calendar will be loaded here -->
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <h3><i class="fas fa-trophy"></i> Recent Achievements</h3>
+                            <div class="achievements-list" id="recentAchievements">
+                                <!-- Achievements will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Tab -->
+                <div class="tab-pane" id="activity">
+                    <div class="activity-feed">
+                        <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                        <div class="activity-list" id="profileActivityList">
+                            <!-- Activity will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements Tab -->
+                <div class="tab-pane" id="achievements">
+                    <div class="achievements-container">
+                        <h3><i class="fas fa-trophy"></i> Your Achievements</h3>
+                        <div class="achievements-grid" id="profileAchievements">
+                            <!-- Achievements will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Goals Tab -->
+                <div class="tab-pane" id="goals">
+                    <div class="goals-container">
+                        <h3><i class="fas fa-bullseye"></i> Study Goals</h3>
+                        <div class="goals-list" id="goalsList">
+                            <!-- Goals will be loaded here -->
+                        </div>
+                        <button class="btn-primary" id="addGoal">
+                            <i class="fas fa-plus"></i>
+                            Add New Goal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Friends Tab -->
+                <div class="tab-pane" id="friends">
+                    <div class="friends-container">
+                        <h3><i class="fas fa-users"></i> Study Buddies</h3>
+                        <div class="friends-list" id="friendsList">
+                            <!-- Friends will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="tab-pane" id="settings">
+                    <div class="settings-container">
+                        <h3><i class="fas fa-cog"></i> Profile Settings</h3>
+                        <div class="settings-form">
+                            <div class="form-group">
+                                <label for="displayName">Display Name</label>
+                                <input type="text" id="displayName" placeholder="Enter your display name">
+                            </div>
+                            <div class="form-group">
+                                <label for="bio">Bio</label>
+                                <textarea id="bio" placeholder="Tell us about yourself..." rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="studyGoals">Study Goals</label>
+                                <textarea id="studyGoals" placeholder="What are your study goals?" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <h4>Privacy Settings</h4>
+                                <div class="privacy-options">
+                                    <div class="privacy-option">
+                                        <input type="checkbox" id="showOnline" checked>
+                                        <label for="showOnline">Show when I'm online</label>
+                                    </div>
+                                    <div class="privacy-option">
+                                        <input type="checkbox" id="showStreak" checked>
+                                        <label for="showStreak">Show my streak</label>
+                                    </div>
+                                    <div class="privacy-option">
+                                        <input type="checkbox" id="showStudyTime" checked>
+                                        <label for="showStudyTime">Show my study time</label>
+                                    </div>
+                                    <div class="privacy-option">
+                                        <input type="checkbox" id="allowFollow" checked>
+                                        <label for="allowFollow">Allow others to follow me</label>
+                                    </div>
+                                    <div class="privacy-option">
+                                        <input type="checkbox" id="showAchievements" checked>
+                                        <label for="showAchievements">Show my achievements</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h4>Notification Preferences</h4>
+                                <div class="notification-options">
+                                    <div class="notification-option">
+                                        <input type="checkbox" id="notifyStudyReminders" checked>
+                                        <label for="notifyStudyReminders">Study reminders</label>
+                                    </div>
+                                    <div class="notification-option">
+                                        <input type="checkbox" id="notifyAchievements" checked>
+                                        <label for="notifyAchievements">Achievement alerts</label>
+                                    </div>
+                                    <div class="notification-option">
+                                        <input type="checkbox" id="notifyFriendActivity" checked>
+                                        <label for="notifyFriendActivity">Friend activity</label>
+                                    </div>
+                                    <div class="notification-option">
+                                        <input type="checkbox" id="notifyStreakAlerts" checked>
+                                        <label for="notifyStreakAlerts">Streak alerts</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button class="btn-primary" id="saveSettings">
+                                    <i class="fas fa-save"></i>
+                                    Save Changes
+                                </button>
+                                <button class="btn-secondary" id="changePassword">
+                                    <i class="fas fa-lock"></i>
+                                    Change Password
+                                </button>
+                                <button class="btn-danger" id="deleteAccount">
+                                    <i class="fas fa-trash"></i>
+                                    Delete Account
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../scripts/database.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/profile.js"></script>
+</body>
+</html>
