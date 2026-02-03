@@ -206,4 +206,138 @@ class StudyStopwatch {
         if (hours > 0) {
             return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         } else {
-            return `${minutes}:${seconds.toString().padStart(2, '0')}.${ms.toString().padStart(2, '
+            return `${minutes}:${seconds.toString().padStart(2, '0')}.${ms.toString().padStart(2, '0')}`;
+        }
+    }
+
+    showSessionSummary(session) {
+        const summary = document.createElement('div');
+        summary.className = 'session-summary animate-fade-in-up';
+        summary.innerHTML = `
+            <div class="summary-header">
+                <h3><i class="fas fa-trophy"></i> Session Complete!</h3>
+                <button class="close-summary"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="summary-content">
+                <div class="summary-stat">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>${db.formatTime(session.duration)}</h4>
+                        <p>Total Study Time</p>
+                    </div>
+                </div>
+                <div class="summary-stat">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <h4>${session.subject}</h4>
+                        <p>Subject</p>
+                    </div>
+                </div>
+                <div class="summary-stat">
+                    <i class="fas fa-fire"></i>
+                    <div>
+                        <h4>+${Math.floor(session.duration / 60)}</h4>
+                        <p>Minutes Added to Streak</p>
+                    </div>
+                </div>
+            </div>
+            <div class="summary-actions">
+                <button class="btn-secondary" onclick="this.closest('.session-summary').remove()">Close</button>
+                <button class="btn-primary" onclick="app.navigateTo('stats')">View Statistics</button>
+            </div>
+        `;
+        
+        document.body.appendChild(summary);
+        
+        // Close button
+        summary.querySelector('.close-summary').addEventListener('click', () => {
+            summary.remove();
+        });
+        
+        // Auto-remove after 10 seconds
+        setTimeout(() => {
+            if (summary.parentNode) {
+                summary.classList.add('fade-out');
+                setTimeout(() => summary.remove(), 300);
+            }
+        }, 10000);
+    }
+
+    updateUserStats() {
+        const user = db.getUser(this.username);
+        if (!user) return;
+        
+        // Update display stats
+        document.getElementById('totalStudyTime')?.textContent = db.formatTime(user.stats.totalStudyTime);
+        document.getElementById('currentStreak')?.textContent = `${user.stats.currentStreak} days`;
+    }
+
+    checkAchievements() {
+        const achievements = db.checkAchievements(this.username);
+        achievements.forEach(achievement => {
+            app.showNotification(
+                'Achievement Unlocked!',
+                achievement.title,
+                'success'
+            );
+        });
+    }
+
+    loadPreviousSessions() {
+        // Load last 3 sessions for quick reference
+        const sessions = JSON.parse(localStorage.getItem('studyzen_sessions') || '[]');
+        const userSessions = sessions
+            .filter(s => s.username === this.username && s.type === 'stopwatch' && s.completed)
+            .sort((a, b) => new Date(b.endTime) - new Date(a.endTime))
+            .slice(0, 3);
+        
+        if (userSessions.length > 0) {
+            this.displayRecentSessions(userSessions);
+        }
+    }
+
+    displayRecentSessions(sessions) {
+        const container = document.querySelector('.recent-sessions');
+        if (!container) return;
+        
+        container.innerHTML = `
+            <h3><i class="fas fa-history"></i> Recent Sessions</h3>
+            <div class="session-list">
+                ${sessions.map(session => `
+                    <div class="session-item">
+                        <div class="session-subject">${session.subject}</div>
+                        <div class="session-duration">${db.formatTime(session.duration)}</div>
+                        <div class="session-date">${db.formatDate(session.endTime)}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    playSound(type) {
+        try {
+            const sounds = {
+                'lap': 'https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3',
+                'start': 'https://assets.mixkit.co/sfx/preview/mixkit-game-show-intro-music-687.mp3',
+                'complete': 'https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3'
+            };
+            
+            const audio = new Audio(sounds[type] || sounds.lap);
+            audio.volume = 0.3;
+            audio.play().catch(e => console.log('Audio play failed:', e));
+        } catch (error) {
+            console.log('Sound error:', error);
+        }
+    }
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    const currentUser = JSON.parse(sessionStorage.getItem('studyzen_demo') || 
+                                   localStorage.getItem('studyzen_user') || 
+                                   sessionStorage.getItem('studyzen_user') || '{}');
+    
+    if (currentUser.username || currentUser.isDemo) {
+        window.stopwatch = new StudyStopwatch(currentUser.username || 'demo_user');
+    }
+});
