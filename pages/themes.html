@@ -1,1 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Themes - StudyZen</title>
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/themes.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="default-theme">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fas fa-brain"></i>
+            <h2>Study<span class="zen">Zen</span></h2>
+        </div>
+        
+        <div class="user-profile">
+            <div class="profile-pic">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info">
+                <h3 id="userDisplayName">User</h3>
+                <p id="userStreak">🔥 0 day streak</p>
+            </div>
+        </div>
 
+        <ul class="nav-menu">
+            <li class="nav-item" data-page="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </li>
+            <li class="nav-item" data-page="pomodoro">
+                <i class="fas fa-clock"></i>
+                <span>Pomodoro Timer</span>
+            </li>
+            <li class="nav-item" data-page="stopwatch">
+                <i class="fas fa-stopwatch"></i>
+                <span>Study Stopwatch</span>
+            </li>
+            <li class="nav-item" data-page="stats">
+                <i class="fas fa-chart-line"></i>
+                <span>Statistics</span>
+            </li>
+            <li class="nav-item" data-page="chatbot">
+                <i class="fas fa-robot"></i>
+                <span>AI Assistant</span>
+            </li>
+            <li class="nav-item" data-page="community">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </li>
+            <li class="nav-item" data-page="profile">
+                <i class="fas fa-user-circle"></i>
+                <span>My Profile</span>
+            </li>
+            <li class="nav-item active" data-page="themes">
+                <i class="fas fa-palette"></i>
+                <span>Themes</span>
+            </li>
+            <li class="nav-item" data-page="support">
+                <i class="fas fa-headset"></i>
+                <span>Support</span>
+            </li>
+        </ul>
+
+        <!-- Study Pet -->
+        <div class="study-pet">
+            <div class="pet-container">
+                <div class="pet" id="studyPet">
+                    <i class="fas fa-cat"></i>
+                </div>
+                <div class="pet-info">
+                    <p>Study Buddy</p>
+                    <div class="pet-happiness">
+                        <div class="happiness-bar">
+                            <div class="happiness-fill"></div>
+                        </div>
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search users, forums, or features...">
+            </div>
+            
+            <div class="top-bar-actions">
+                <button class="notification-btn" id="notificationBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">0</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="focus-mode-btn" id="focusModeBtn">
+                    <i class="fas fa-eye"></i>
+                    <span>Focus Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Themes Content -->
+        <div class="themes-container">
+            <div class="themes-header">
+                <h1><i class="fas fa-palette"></i> Theme Customization</h1>
+                <p>Choose a theme that matches your study vibe. Customize colors, animations, and more!</p>
+            </div>
+
+            <!-- Current Theme -->
+            <div class="current-theme">
+                <div class="current-theme-preview">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="current-theme-info">
+                    <h3 id="currentThemeName">Default Theme</h3>
+                    <p id="currentThemeDescription">Clean and professional study environment</p>
+                    <div class="theme-stats">
+                        <div class="theme-stat">
+                            <div class="stat-value" id="themeUsage">0</div>
+                            <div class="stat-label">Days Used</div>
+                        </div>
+                        <div class="theme-stat">
+                            <div class="stat-value" id="themeChanged">0</div>
+                            <div class="stat-label">Times Changed</div>
+                        </div>
+                        <div class="theme-stat">
+                            <div class="stat-value" id="themeRating">5.0</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-primary" id="resetTheme">
+                    <i class="fas fa-redo"></i>
+                    Reset to Default
+                </button>
+            </div>
+
+            <!-- Theme Customization -->
+            <div class="theme-customization">
+                <h3><i class="fas fa-sliders-h"></i> Customization Options</h3>
+                <div class="customization-options">
+                    <div class="option-group">
+                        <h4>Theme Behavior</h4>
+                        <div class="option-item">
+                            <div class="switch-group">
+                                <label for="autoThemeSwitch">Auto Theme Switch</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="autoThemeSwitch">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <small>Automatically switch between light/dark themes</small>
+                        </div>
+                        <div class="option-item">
+                            <label for="darkModeSchedule">Dark Mode Schedule</label>
+                            <select id="darkModeSchedule">
+                                <option value="auto">Sunset to Sunrise</option>
+                                <option value="custom">Custom Time</option>
+                                <option value="always">Always Dark</option>
+                                <option value="never">Never Dark</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h4>Animations</h4>
+                        <div class="option-item">
+                            <label for="animationIntensity">Animation Intensity</label>
+                            <select id="animationIntensity">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                                <option value="extreme">Extreme</option>
+                            </select>
+                        </div>
+                        <div class="option-item">
+                            <div class="switch-group">
+                                <label for="reduceMotion">Reduce Motion</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="reduceMotion">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <small>Reduce animations for accessibility</small>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <h4>Sound & Effects</h4>
+                        <div class="option-item">
+                            <div class="switch-group">
+                                <label for="themeSounds">Theme Sounds</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="themeSounds" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <small>Play sounds when changing themes</small>
+                        </div>
+                        <div class="option-item">
+                            <div class="switch-group">
+                                <label for="confettiEffects">Confetti Effects</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="confettiEffects" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <small>Show celebration effects</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-actions">
+                    <button class="btn-primary" id="saveThemePrefs">
+                        <i class="fas fa-save"></i>
+                        Save Preferences
+                    </button>
+                    <button class="btn-secondary" id="createCustomTheme">
+                        <i class="fas fa-plus"></i>
+                        Create Custom Theme
+                    </button>
+                </div>
+            </div>
+
+            <!-- Themes Grid -->
+            <div class="themes-grid" id="themesGrid">
+                <!-- Themes will be loaded here -->
+            </div>
+
+            <!-- Theme Preview Modal -->
+            <div class="theme-preview-modal" id="themePreview">
+                <!-- Preview content will be injected here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../scripts/database.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/themes.js"></script>
+</body>
+</html>
